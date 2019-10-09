@@ -41,10 +41,10 @@
   </instrumentCalibration>
 
   <instrumentCalibration>
-    <name>HearingYearlyCalibrationLog</name>
+    <name>AudiometerYearlyCalibrationLog</name>
     <instructions>
-      <string>HearingYearlyCalibrationLog.Instruction1</string>
-      <string>HearingYearlyCalibrationLog.Instruction2</string>
+      <string>AudiometerYearlyCalibrationLog.Instruction1</string>
+      <string>AudiometerYearlyCalibrationLog.Instruction2</string>
     </instructions>
     <instrumentType>Hearing</instrumentType>
     <attribute>
