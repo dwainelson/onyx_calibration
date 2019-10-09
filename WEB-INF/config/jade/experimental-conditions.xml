@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+  <instrumentCalibration>
+    <name>WeighScaleWeeklyCalibrationLog</name>
+    <instructions>
+      <string>WeighScaleWeeklyCalibrationLog.Instruction1</string>
+      <string>WeighScaleWeeklyCalibrationLog.Instruction2</string>
+      <string>WeighScaleWeeklyCalibrationLog.Instruction3</string>
+    </instructions>
+    <instrumentType>Weight</instrumentType>
+    <attribute>
+      <name>CalibrationWeight</name>
+      <type>INTEGER</type>
+      <unit>Kg</unit>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>33</minimum>
+            <maximum>35</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>WeighScaleYearlyCalibrationLog</name>
+    <instructions>
+      <string>WeighScaleYearlyCalibrationLog.Instruction1</string>
+      <string>WeighScaleYearlyCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>Weight</instrumentType>
+    <attribute>
+      <name>CalibrationConfirmation</name>
+      <type>TEXT</type>
+      <allowedValues>
+        <string>Yes</string>
+        <string>No</string>
+      </allowedValues>
+    </attribute>
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>HearingYearlyCalibrationLog</name>
+    <instructions>
+      <string>HearingYearlyCalibrationLog.Instruction1</string>
+      <string>HearingYearlyCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>Hearing</instrumentType>
+    <attribute>
+      <name>CalibrationConfirmation</name>
+      <type>TEXT</type>
+      <allowedValues>
+        <string>Yes</string>
+        <string>No</string>
+      </allowedValues>
+    </attribute>
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>BloodPressureYearlyCalibrationLog</name>
+    <instructions>
+      <string>BloodPressureYearlyCalibrationLog.Instruction1</string>
+      <string>BloodPressureYearlyCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>BloodPressure</instrumentType>
+    <attribute>
+      <name>CalibrationConfirmation</name>
+      <type>TEXT</type>
+      <allowedValues>
+        <string>Yes</string>
+        <string>No</string>
+      </allowedValues>
+    </attribute>
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>GripStrengthYearlyCalibrationLog</name>
+    <instructions>
+      <string>GripStrengthYearlyCalibrationLog.Instruction1</string>
+      <string>GripStrengthYearlyCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>GripStrength</instrumentType>
+    <attribute>
+      <name>CalibrationConfirmation</name>
+      <type>TEXT</type>
+      <allowedValues>
+        <string>Yes</string>
+        <string>No</string>
+      </allowedValues>
+    </attribute>
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>SpirometerDailySyringeCalibrationLog</name>
+    <instructions>
+      <string>SpirometerDailySyringeCalibrationLog.Instruction1</string>
+      <string>SpirometerDailySyringeCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>Spirometry</instrumentType>
+
+    <attribute>
+      <name>Temperature</name>
+      <type>DECIMAL</type>
+      <unit>°C</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>15.0</minimum>
+            <maximum>35.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Humidity</name>
+      <type>INTEGER</type>
+      <unit>%</unit> 
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>10</minimum>
+            <maximum>40</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Altitude</name>
+      <type>INTEGER</type>
+      <unit>m</unit>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>0</minimum>
+            <maximum>2000</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1VExp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1VExpPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1VInsp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1VInspPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1FExp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1FInsp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2VExp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2VExpPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2VInsp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2VInspPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2FExp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2FInsp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3VExp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3VExpPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3VInsp</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3VInspPerc</name>
+      <type>DECIMAL</type>
+      <unit>% Diff</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>-100.0</minimum>
+            <maximum>100.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3FExp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3FInsp</name>
+      <type>DECIMAL</type>
+      <unit>L/s</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>1.0</minimum>
+            <maximum>5.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+  </instrumentCalibration>
+
+  <instrumentCalibration>
+    <name>SpirometerMonthlyBioCalibrationLog</name>
+    <instructions>
+      <string>SpirometerMonthlyBioCalibrationLog.Instruction1</string>
+      <string>SpirometerMonthlyBioCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>Spirometry</instrumentType>
+
+    <attribute>
+      <name>Trial1Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1FVC</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1FEV1</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial1FEV1FVC</name>
+      <type>DECIMAL</type>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>0.0</minimum>
+            <maximum>1.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2FVC</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2FEV1</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial2FEV1FVC</name>
+      <type>DECIMAL</type>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>0.0</minimum>
+            <maximum>1.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3Rank</name>
+      <type>INTEGER</type>
+      <validators>
+        <dataValidator dataType="INTEGER">
+          <rangeValidator>
+            <minimum>1</minimum>
+            <maximum>3</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3FVC</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3FEV1</name>
+      <type>DECIMAL</type>
+      <unit>L</unit>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>2.0</minimum>
+            <maximum>4.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+    <attribute>
+      <name>Trial3FEV1FVC</name>
+      <type>DECIMAL</type>
+      <validators>
+        <dataValidator dataType="DECIMAL">
+          <rangeValidator>
+            <minimum>0.0</minimum>
+            <maximum>1.0</maximum>
+          </rangeValidator>
+        </dataValidator>
+      </validators>
+    </attribute>
+
+  </instrumentCalibration>
+
+</list>

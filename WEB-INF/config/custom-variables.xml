@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- See documentation: http://wiki.obiba.org/confluence/display/ONYX/Onyx+Configuration+Guide#OnyxConfigurationGuide-ConfigurableVariables -->
+<customVariables>
+
+  <valueTable name="ParticipantReport">
+  	<variables>
+	  <variable name="BMI_ROUND_2D" valueType="decimal" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">BMI</attribute>
+          <attribute name="label" valueType="text" locale="fr">IMC</attribute>
+          <attribute name="script" valueType="text">
+         	bmi=$('Participants:BMI');
+         	if (bmi.isNull().not().value()) {
+           		bmi.value().toFixed(2);
+            }
+          </attribute>
+        </attributes>
+      </variable>
+      <variable name="BMINR" valueType="text" entityType="Participant">
+        <attributes>
+          <attribute name="script" valueType="text">
+          "18.5 - 24.9"
+          </attribute>
+        </attributes>
+      </variable>
+      <variable name="BMIInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	  bmi=$('Participants:BMI');
+        	  if (bmi.isNull().not().value()) {
+	          	bmi.lt(18.5).value() ? 'BMI.LOW' : (bmi.gt(24.9).value() ? 'BMI.HIGH' : 'BMI.NORMAL');
+	          }
+	        </attribute>
+        </attributes>
+      </variable>
+      <variable name="waistToHipRatio_ROUND_2D" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	 	ratio=$('HipsWaist:CALC_WAIST_TO_HIP_RATIO');
+	         	if (ratio.isNull().not().value()) {
+	           		ratio.value().toFixed(2);
+	            }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="waistToHipRatioInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	  ratio=$('HipsWaist:CALC_WAIST_TO_HIP_RATIO');
+        	  if (ratio.isNull().not().value()) {
+	        	  gender=$('Participants:Admin.Participant.gender');
+	        	  threshold=gender.map({'MALE':1,'FEMALE':0.8});
+		   	  	  ratio.gt(threshold).value() ? 'WTHR.HIGH' : 'WTHR.NORMAL';
+	   	  	  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="waistToHipRatioNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	  ratio=$('HipsWaist:CALC_WAIST_TO_HIP_RATIO');
+        	  if (ratio.isNull().not().value()) {
+	        	  gender=$('Participants:Admin.Participant.gender');
+	        	  gender.map({'MALE':"&lt;=1.0",'FEMALE':"&lt;=0.8"});
+	   	  	  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPSystolic_ROUND_2D" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	 	sys=$('BloodPressure:RES_AVG_SYSTOLIC');
+	         	if (sys.isNull().not().value()) {
+	           		sys.value().toFixed(2);
+	            }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPSystolicNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		"&lt;130";
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPSystolicInt" valueType="text" entityType="Participant">
+        <attributes>
+       	 	<attribute name="script" valueType="text">
+       	 		sys=$('BloodPressure:RES_AVG_SYSTOLIC');
+       	 		if (sys.isNull().not().value()) {
+       	 			sys.lt(130).value() ? 'BP.NORMAL' : (sys.ge(140).value() ? 'BP.HIGH' : 'BP.BORDERLINE');
+       	 		}
+       	 	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPDiastolic_ROUND_2D" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        	 	dias=$('BloodPressure:RES_AVG_DIASTOLIC');
+	         	if (dias.isNull().not().value()) {
+	           		dias.value().toFixed(2);
+	            }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPDiastolicNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		"&lt;85";
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BPDiastolicInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		dias=$('BloodPressure:RES_AVG_DIASTOLIC');
+        		if (dias.isNull().not().value()) {
+       	 			dias.lt(85).value() ? 'BP.NORMAL' : (dias.ge(90).value() ? 'BP.HIGH' : 'BP.BORDERLINE');
+       	 		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="QUALITY_GRADE" valueType="text" entityType="Participant">
+        <attributes>
+                <attribute name="script" valueType="text">
+                        qg=$('Spirometry:OUTPUT_QUALITY_GRADE');
+                        if (qg.isNull().not().value()) {
+                            qg.value();
+                        } else {
+                          'NO';
+                        }
+                </attribute>
+        </attributes>
+      </variable>
+      <variable name="FVC_sequence_index" valueType="integer" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		fvcseq=$('Spirometry:Measure.RES_FVC');
+        		if (fvcseq.isNull().not().value()) {
+	        		fvcMax=$('Spirometry:Measure.RES_FVC').sort().last();
+	        		for(i=0;i&lt;fvcseq.size();i++) {
+	        			if (fvcseq.valueAt(i).eq(fvcMax).value()) {
+	        				i;
+	        			}
+	        		}
+	        	}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FVC" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                      if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+
+				if ($('FVC_sequence_index').isNull().not().value()) {
+        		 $('Spirometry:Measure.RES_FVC').valueAt($('FVC_sequence_index').value()).value().toFixed(2);
+        		}
+                      }
+        	</attribute>
+        </attributes>
+	  </variable>
+      <variable name="FEV1" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+        	    if ($('FVC_sequence_index').isNull().not().value()) {
+        		 $('Spirometry:Measure.RES_FEV1').valueAt($('FVC_sequence_index').value()).value().toFixed(2);
+        		}
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="FEV1FVC" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+        		if ($('FVC_sequence_index').isNull().not().value()) {
+        		 $('Spirometry:Measure.RES_FEV1_FVC').valueAt($('FVC_sequence_index').value()).value().toFixed(2);
+        		}
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FEV1FVCNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		'>0.7'
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FEV1FVCInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                      if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+        		v=$('ParticipantReport:FEV1FVC');
+        		if (v.gt(0.7).isNull().not().value()) {
+        			v.gt(0.7).value() ? 'SPIROMETRY.NORMAL' : 'SPIROMETRY.LOW';
+        		}
+                      }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FEV1NR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+		    if ($('Spirometry:RES_FEV1_LLNORMAL2').isNull().not().value()) {
+		      fev1ll=$('Spirometry:RES_FEV1_LLNORMAL2').value().toFixed(2);
+		      str1='>=';
+		      str1.concat(fev1ll);
+		    }
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FEV1Int" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+		    if ($('Spirometry:RES_FEV1_LLNORMAL2').isNull().not().value()) {
+                      fev1ll=$('Spirometry:RES_FEV1_LLNORMAL2');
+	              fev1=$('FEV1');
+                      fev1.lt(fev1ll.value()).value() ? 'FEV1.LOW' : 'FEV1.NORMAL';
+		    }
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FVCNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+		    if ($('Spirometry:RES_FVC_LLNORMAL2').isNull().not().value()) {
+		      fvc1ll=$('Spirometry:RES_FVC_LLNORMAL2').value().toFixed(2);
+		      str1='>=';
+		      str1.concat(fvc1ll);
+		    }
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="FVCInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+                  if ($('ParticipantReport:QUALITY_GRADE').any('A','B').value()) {
+                    if ($('Spirometry:RES_FVC_LLNORMAL2').isNull().not().value()) {
+                      fvc1ll=$('Spirometry:RES_FVC_LLNORMAL2');
+                      fvc1=$('FVC');
+                      fvc1.lt(fvc1ll.value()).value() ? 'FVC.LOW' : 'FVC.NORMAL';
+		    }
+                  }
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BMD" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+<!-- TEMPORARILY REMOVED
+          sides=$('DualHipBoneDensity:Measure.OUTPUT_HIP_SIDE');
+          var hipTS=null;
+          if (sides.isNull().not().value()) {
+            for (i=0;i&lt;sides.size().value();i++) {
+              if( sides.valueAt(i).any('LEFT').value()) {
+                hipTS=$('DualHipBoneDensity:Measure.RES_HIP_HTOT_T').valueAt(i);
+                break;
+              }
+              if( sides.valueAt(i).any('RIGHT').value()) {
+                hipTS=$('DualHipBoneDensity:Measure.RES_HIP_HTOT_T').valueAt(i);
+              }
+            }
+          }
+          hipTS;
+-->
+"BMD.TEXT";
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BMDNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+<!-- TEMPORARILY REMOVED
+        	gender=$('Participants:Admin.Participant.gender');
+        	postmenopausal=$('Participants:Admin.Participant.age').ge(50);
+        	gender.map({
+        		'MALE':'> -2.5 SDs',
+        		'FEMALE':postmenopausal.value() ? '> -1.0 SDs' : '> -2.5 SDs'
+        	})
+-->
+"BMDNR.TEXT";
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="BMDInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+<!-- TEMPORARILY REMOVED
+        	bmd=$('ParticipantReport:BMD');
+        	if (bmd.isNull().not().value()) {
+	        	gender=$('Participants:Admin.Participant.gender');
+	        	postmenopausal=$('Participants:Admin.Participant.age').ge(50);
+	        	gender.map({
+	        		'MALE':bmd.gt(-2.5).value() ? 'BMD.NORMAL' : 'BMD.LOW',
+	        		'FEMALE':postmenopausal.value() ? (bmd.gt(-1.0).value() ? 'BMD.NORMAL' : 'BMD.LOW')
+	        								        : (bmd.gt(-2.5).value() ? 'BMD.NORMAL' : 'BMD.LOW')
+	        	})
+	        }
+-->
+"BMDInt.TEXT";
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="TBFP_ROUND_2D" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		fat=$('WholeBodyBoneDensity:RES_WB_TOTAL_PERCENT_FAT')
+        		if (fat.isNull().not().value()) {
+	        		fat.value().toFixed(2);
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="TBFPNR" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+			  <!-- 80+ year olds use the same interpretation as 60-79 -->
+        		gender=$('Participants:Admin.Participant.gender');
+        		age=$('Participants:Admin.Participant.age');
+
+        		between4059=age.ge(40).and(age.le(59));
+        		between6079=age.ge(60);
+
+        		if (between4059.or(between6079).value()) {
+        			nr4059=gender.map({'MALE':'11% - 22%','FEMALE':'23% - 34%'});
+	        		nr6079=gender.map({'MALE':'13% - 25%','FEMALE':'24% - 36%'});
+
+	        		between4059.value() ? nr4059 : (between6079.value() ? nr6079 : '');
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="TBFPInt" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+			  <!-- 80+ year olds use the same interpretation as 60-79 -->
+        		tbfp=$('WholeBodyBoneDensity:RES_WB_TOTAL_PERCENT_FAT');
+
+        		if (tbfp.isNull().not().value()) {
+	        		gender=$('Participants:Admin.Participant.gender');
+	        		age=$('Participants:Admin.Participant.age');
+
+	        		between4059=age.ge(40).and(age.le(59));
+	        		between6079=age.ge(60);
+
+	        		if (between4059.or(between6079).value()) {
+		        		low4059Threshold=gender.map({'MALE':11,'FEMALE':23});
+		        		low6079Threshold=gender.map({'MALE':13,'FEMALE':24});
+		        		high4059Threshold=gender.map({'MALE':22,'FEMALE':34});
+		        		high6079Threshold=gender.map({'MALE':25,'FEMALE':36});
+
+		        		lowThreshold=between4059.value() ? low4059Threshold : (between6079.value() ? low6079Threshold : null);
+		        		highThreshold=between4059.value() ? high4059Threshold : (between6079.value() ? high6079Threshold : null);
+
+		       			tbfp.lt(lowThreshold).value() ? 'TBFP.LOW' : (tbfp.gt(highThreshold).value() ? 'TBFP.HIGH': 'TBFP.NORMAL');
+		       		}
+       			}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE500" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_500');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE1000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_1K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE2000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_2K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE3000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_3K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE4000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_4K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE6000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_6K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="RE8000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_RIGHT_8K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+
+      <variable name="LE500" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_500');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="LE1000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_1K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="LE2000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_2K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="LE3000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_3K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="LE4000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_4K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="LE6000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_6K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+       <variable name="LE8000" valueType="text" entityType="Participant">
+        <attributes>
+        	<attribute name="script" valueType="text">
+        		v=$('Hearing:RES_LEFT_8K');
+        		if (v.isNull().not().value()) {
+        			v.gt(40).value() ? "FAIL" : "PASS";
+        		}
+        	</attribute>
+        </attributes>
+      </variable>
+      <variable name="VisualAcuity" valueType="text" entityType="Participant">
+        <attributes>
+          <attribute name="script" valueType="text">
+                  <!-- BOTH1 is from Qx VisualAcuity version 3.1 and BOTH is from 3.0 -->
+                  if ($('VisionAcuity:ETDRS_SCORE_BOTH1').isNull().not()) {
+                    vis=$('VisionAcuity:ETDRS_SCORE_BOTH1');
+                  } else {
+                    vis=$('VisionAcuity:ETDRS_SCORE_BOTH');
+                  }
+                  ret=null;
+                  if (vis.isNull().not().and(vis.eq(0).not()).value()) {
+                      ret=12.5;
+                      if (vis.eq(12.5).not().value()) {
+                          ret=vis.value().toFixed(0);
+                      }
+                  }
+
+
+                  ret
+          </attribute>
+        </attributes>
+      </variable>
+
+      <variable name="Weight" valueType="text" entityType="Participant">
+        <attributes>
+          <attribute name="script" valueType="text">
+                weight=$('Weight:RES_WEIGHT');
+                if (weight.isNull().not().value()) {
+                   weight.value().toFixed(2) + " kg";
+            }
+          </attribute>
+        </attributes>
+      </variable>
+
+      <variable name="Height" valueType="text" entityType="Participant">
+        <attributes>
+          <attribute name="script" valueType="text">
+                height=$('StandingHeight:RES_HEIGHT');
+                if (height.isNull().not().value()) {
+                   height.value().toFixed(2) + " cm";
+            }
+          </attribute>
+        </attributes>
+      </variable>
+      <variable name="FRAX" valueType="text" entityType="Participant">
+        <attributes>
+          <attribute name="script" valueType="text">
+             prevfx=$('Frax:INPUT_PARTICIPANT_PREVIOUS_FX');
+             tscore=$('Frax:INPUT_PARTICIPANT_TSCORE');
+             frax=$('Frax:FRAX_OSTFX_BMD_COF2');
+             if (frax.isNull().not().value()) {
+                  if (prevfx.isNull().not().value()) {
+                     fraxhi=frax.gt(20).or(prevfx.any(1));
+                  }
+                  else {
+                     fraxhi=frax.gt(20);
+                  }
+                  if (tscore.isNull().not().value()){
+                     fraxhi.value() ? 'FRAX.HIGH' : (frax.lt(10).and(tscore.gt(-2.5)).value() ? 'FRAX.LOW' : 'FRAX.MOD');
+                  } else  {
+                         fraxhi.value() ? 'FRAX.HIGH' : (frax.lt(10).value() ? 'FRAX.LOW' : 'FRAX.MOD');
+                    }
+             } else {null}
+          </attribute>
+        </attributes>
+      </variable>
+    </variables>
+  </valueTable>
+  <valueTable name="Participants">
+    <variables>
+      <variable name="Admin.Interview.exportable" valueType="boolean" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">Determines if a participant's interview can be exported.</attribute>
+          <attribute name="script" valueType="text">
+            // Export if interview is CLOSED, COMPLETED
+            $('Participants:Admin.Interview.status').any('CLOSED','COMPLETED');
+          </attribute>
+        </attributes>
+      </variable>
+      <variable name="AGE" valueType="integer" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">Age</attribute>
+          <attribute name="label" valueType="text" locale="fr">Age</attribute>
+          <attribute name="script" valueType="text">
+			monthDiff=now().month().minus($('Admin.Participant.birthDate').month());
+			dayDiff=now().dayOfMonth().minus($('Admin.Participant.birthDate').dayOfMonth());
+			if (monthDiff.gt(0).or(monthDiff.eq(0).and(dayDiff.ge(0))).value()){
+			  now().year().minus($('Admin.Participant.birthDate').year());
+			} else {
+			  now().year().minus($('Admin.Participant.birthDate').year())-1;
+			}
+          </attribute>
+        </attributes>
+      </variable>
+      <variable name="BMI" valueType="decimal" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">BMI</attribute>
+          <attribute name="label" valueType="text" locale="fr">IMC</attribute>
+          <attribute name="script" valueType="text">
+          	weight=$('Weight:RES_WEIGHT');
+          	height=$('StandingHeight:RES_HEIGHT');
+         	if (weight.isNull().not().and(height.isNull().not()).value()) {
+           		weight.toUnit('kg').div(Math.pow(height.toUnit('m'),2));
+            }
+          </attribute>
+        </attributes>
+      </variable>
+       <variable name="POTENTIAL_PREGNANCY" valueType="boolean" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">True when the participant may be pregnant: not in menopause, did not have an hysterectomy.</attribute>
+          <attribute name="label" valueType="text" locale="fr">Vrai lorsque le participant peut tre ensceinte: pas encore en mnopause, n'a pas eu d'hysterectomie.</attribute>
+          <attribute name="script" valueType="text">
+            // Only women that are not in their menopause or didn't have an hysterectomy. If we don't have the information, then we consider that it's a potential pregnancy.
+            // For F1 removed whenNull(true) because the question may not be answered in Folloup one null means the already answered previously
+            // the isNUll() parameter
+            var potentialPregnancy = false;
+            if($('Participants:Admin.Participant.gender').any('FEMALE')
+                .and($('dcs-cache.InHome2DCS:WHO_MENOP_COF1').isNull().not()).value()) {
+              try {
+                //potentialPregnancy = $('dcs-cache.InHome2DCS:WHO_MENOP_COF1').any('YES', 'HYSTERECTOMY').not().whenNull(true).value();
+                potentialPregnancy = $('dcs-cache.InHome2DCS:WHO_MENOP_COF1').any('YES', 'HYSTERECTOMY').not().value();
+              } catch(e) {
+                log('WARN: Error fetching data from Cache');
+                log(e);
+                potentialPregnancy = true;
+              }
+            }
+            potentialPregnancy;
+          </attribute>
+        </attributes>
+      </variable>
+
+      <variable name="GeneralComments" valueType="text" entityType="Participant" repeatable="true">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">Comments to be exported to beartooth</attribute>
+          <attribute name="script" valueType="text">
+            var stage = $('Admin.Action.stage');
+            var comment = $('Admin.Action.comment');
+            var tempArray = [""];
+            var res = "";
+            var j = 0;
+            if (stage.isNull().not().value()) {
+              for(i=0;i&lt;stage.size();i++) {
+                if (stage.valueAt(i).value() == null &amp;&amp; comment.valueAt(i).value() != null) {
+                  tempArray[j] = comment.valueAt(i).value();
+                  j++;
+                }
+              }
+              res =  JSON.stringify( tempArray );
+              res;
+              } else {
+                null;
+              }
+          </attribute>
+        </attributes>
+      </variable>
+
+    </variables>
+  </valueTable>
+
+  <valueTable name="Consent">
+    <variables>
+      <variable name="satisfied" valueType="boolean" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">This variable is true if the participant is 70 years or younger or when they've signed and accepted the consent form.'</attribute>
+          <attribute name="script" valueType="text">
+			<!-- Interview can be done even if consent is refused -->
+            $('Participants:Admin.Participant.age').le(70).or($('Consent:accepted').or($('Consent:accepted').not()))
+	      </attribute>
+        </attributes>
+      </variable>
+    </variables>
+  </valueTable>
+
+  <valueTable name="GeneralProxy">
+    <variables>
+      <variable name="satisfied" valueType="boolean" entityType="Participant">
+        <attributes>
+          <attribute name="label" valueType="text" locale="en">This variable is true if the participant is 70 years or younger or when they've signed and accepted the proxy form.'</attribute>
+          <attribute name="script" valueType="text">
+                        <!-- Interview can be done even if consent is refused -->
+            $('Participants:Admin.Participant.age').le(70).or($('GeneralProxy:accepted').or($('GeneralProxy:accepted').not()))
+              </attribute>
+        </attributes>
+      </variable>
+    </variables>
+  </valueTable>
+  
+  <valueTable name="Instruments">
+    <variables>
+     <variable name="site" valueType="text" entityType="Instrument">
+       <attributes>
+         <attribute name="script" valueType="text">
+           $('Participants:Admin.ApplicationConfiguration.siteName').firstNotNull().lowerCase().map({
+  'britishcolumbia':'University of BC DCS',
+  'british columbia':'University of BC DCS',
+  'calgary':'Calgary DCS',
+  'dalhousie':'Dalhousie DCS',
+  'hamilton':'Hamilton DCS',
+  'hamiltonhome1':'Hamilton DCS',
+  'himilton':'Hamilton DCS',
+  'manitoba':'Manitoba DCS',
+  'mcgill':'McGill DCS',
+  'mcmaster':'Hamilton DCS',
+  'memorial':'Memorial DCS',
+  'memorial university':'Memorial DCS',
+  'ottawa':'Ottawa DCS',
+  'sherbrooke':'Sherbrooke DCS',
+  'simon fraser':'Simon Fraser DCS',
+  'simonfraser':'Simon Fraser DCS',
+  'universityofbc':'University of BC DCS',
+  'university of manitoba':'Manitoba DCS',
+  'university of victoria':'Victoria DCS',
+  'victoria':'Victoria DCS'},null)
+         </attribute> 
+      </attributes>
+     </variable>
+    </variables>
+  </valueTable>
+
+</customVariables>
