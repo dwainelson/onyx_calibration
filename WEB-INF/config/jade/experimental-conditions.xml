@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list>
+
+  <instrumentCalibration>
+    <name>CarotidIntimaWeeklyCalibrationLog</name>
+    <instructions>
+      <string>CarotidIntimaWeeklyCalibrationLog.Instruction1</string>
+      <string>CarotidIntimaWeeklyCalibrationLog.Instruction2</string>
+    </instructions>
+    <instrumentType>CarotidIntima</instrumentType>
+    <attribute>
+      <name>CalibrationConfirmationWeekly</name>
+      <type>TEXT</type>
+      <allowedValues>
+        <string>Yes</string>
+        <string>No</string>
+      </allowedValues>
+    </attribute>
+  </instrumentCalibration>
+
   <instrumentCalibration>
     <name>WeighScaleWeeklyCalibrationLog</name>
     <instructions>

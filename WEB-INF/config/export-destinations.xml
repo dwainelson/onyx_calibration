@@ -26,7 +26,8 @@
       <entities>
         <excludeAll />
         <script type="INCLUDE">
-          <javascript><![CDATA[$('Instrument.type').any('Weight','Spirometry').and($('Instrument.captureEndDate').isNull().not())]]></javascript>
+          <!--javascript><![CDATA[$('Instrument.type').any('Weight','Spirometry').and($('Instrument.captureEndDate').isNull().not())]]></javascript-->
+          <javascript><![CDATA[($('Instrument.captureEndDate').isNull().not())]]></javascript>
         </script>
         <script type="EXCLUDE">
           <javascript><![CDATA[$('Instrument.exportLog.destination').any('clsa-dcs-logs.Instruments')]]></javascript>
